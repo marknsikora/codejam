@@ -1,0 +1,13 @@
+# Temp files
+*~
+
+# Generated files
+*.o
+*.hi
+*.out
+
+# Binary files
+/*/A
+/*/B
+/*/C
+/*/D
