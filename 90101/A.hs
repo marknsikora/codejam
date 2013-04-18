@@ -23,7 +23,7 @@ expand (x:xs)
 expandWithDict _ [] = [[]]
 expandWithDict [] _ = []
 expandWithDict dict (x:xs)
-  | x /= '('  = if (length filterDict) /= 0
+  | x /= '('  = if not . null $ filterDict
                   then (x:) <$> expandWithDict (tail <$> filterDict) xs
                   else []
   | otherwise = concatMap (expandWithDict dict) ((:tail rest) <$> pos)
