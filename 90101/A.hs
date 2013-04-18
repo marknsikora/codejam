@@ -14,12 +14,6 @@ main = do
 
     printf "Case #%d: %d\n" (caseNum::Int) (ans::Int)
 
-expand [] = [[]]
-expand (x:xs)
-  | x /= '('  = (x:) <$> expand xs
-  | otherwise = (:) <$> pos <*> expand (tail rest)
-  where (pos, rest) = span (')'/=) xs
-
 expandWithDict _ [] = [[]]
 expandWithDict [] _ = []
 expandWithDict dict (x:xs)
