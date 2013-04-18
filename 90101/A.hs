@@ -10,16 +10,13 @@ main = do
   forM_ [1..n] $ \caseNum -> do
     word <- getLine
     
-    let ans = length $ expandWithDict dict word
+    let ans = length . filter id . map match $ dict
+          where match = all (\(x,y) -> y `elem` x) . zip (expand word)
 
     printf "Case #%d: %d\n" (caseNum::Int) (ans::Int)
 
-expandWithDict _ [] = [[]]
-expandWithDict [] _ = []
-expandWithDict dict (x:xs)
-  | x /= '('  = if not . null $ filterDict
-                  then (x:) <$> expandWithDict (tail <$> filterDict) xs
-                  else []
-  | otherwise = concatMap (expandWithDict dict) ((:tail rest) <$> pos)
-  where filterDict = filter (\ys -> x == head ys) dict
-        (pos, rest) = span (')'/=) xs
+expand [] = []
+expand (x:xs)
+  | x == '('  = pos : expand rest
+  | otherwise = [x] : expand xs
+  where (pos, ')':rest) = span (')'/=) xs
