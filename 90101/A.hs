@@ -10,7 +10,7 @@ main = do
   forM_ [1..n] $ \caseNum -> do
     word <- getLine
     
-    let ans = length . filter id . map match $ dict
+    let ans = length . filter match $ dict
           where match = all (\(x,y) -> y `elem` x) . zip (expand word)
 
     printf "Case #%d: %d\n" (caseNum::Int) (ans::Int)
