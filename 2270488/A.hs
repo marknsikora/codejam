@@ -20,7 +20,7 @@ main = do
     let ans = case () of
           _ | check 'X' -> "X won"
             | check 'O' -> "O won"
-            | any ('.'==) (concat b) -> "Game has not completed"
+            | '.' `elem` concat b -> "Game has not completed"
             | otherwise -> "Draw"
 
     printf "Case #%d: %s\n" (caseNum::Int) ans
