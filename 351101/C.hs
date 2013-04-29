@@ -14,7 +14,7 @@ main = do
     let ans = concatMap insertPause . groupBy pauseNeeded $ numified where
           numified = map numify str
           pauseNeeded = (==) `on` head
-          insertPause = intercalate " "
+          insertPause = unwords
 
     printf "Case #%d: %s\n" (caseNum::Int) ans
 
