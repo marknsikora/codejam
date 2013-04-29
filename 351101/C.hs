@@ -1,5 +1,6 @@
 import Control.Monad
 import Data.Char
+import Data.Function
 import Data.List
 import Data.Maybe
 import Text.Printf
@@ -12,7 +13,7 @@ main = do
 
     let ans = concatMap insertPause . groupBy pauseNeeded $ numified where
           numified = map numify str
-          pauseNeeded x y = head x == head y
+          pauseNeeded = (==) `on` head
           insertPause = intercalate " "
 
     printf "Case #%d: %s\n" (caseNum::Int) ans
