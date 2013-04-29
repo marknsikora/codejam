@@ -11,7 +11,7 @@ main = do
 
     let ans = (squareRoot (4*r^2-4*r+8*t+1)-2*r+1) `div` 4
 
-    printf "Case #%d: %d\n" (caseNum::Int) (ans)
+    printf "Case #%d: %d\n" (caseNum::Int) ans
 
 (^!) :: Num a => a -> Int -> a
 (^!) x n = x^n
