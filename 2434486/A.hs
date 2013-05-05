@@ -12,13 +12,10 @@ main = do
 
     let ans = grow a m where
           grow _ [] = 0
-          grow 0 all = length all
-          grow 1 all = length all
           grow x all@(y:ys)
-            | y < x = grow (x+y) ys
-            | best > length all = length all
-            | otherwise = best
-              where
-                best = 1 + grow x ((x-1):all)
+            | x <= 1    = length all
+            | y < x     = grow (x+y) ys
+            | otherwise = let best = 1 + grow x ((x-1):all)
+                          in min best (length all)
 
     printf "Case #%d: %d\n" (caseNum::Int) (ans::Int)
