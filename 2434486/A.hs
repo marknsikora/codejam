@@ -15,7 +15,7 @@ main = do
           grow x all@(y:ys)
             | x <= 1    = length all
             | y < x     = grow (x+y) ys
-            | otherwise = let best = 1 + grow x ((x-1):all)
+            | otherwise = let best = 1 + grow (2*x-1) all
                           in min best (length all)
 
     printf "Case #%d: %d\n" (caseNum::Int) (ans::Int)
