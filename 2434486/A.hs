@@ -7,10 +7,10 @@ main = do
   tests <- readLn
   
   forM_ [1..tests] $ \caseNum -> do
-    [a,n] <- map read . words <$> getLine
+    [a,_n] <- map read . words <$> getLine
     m <- sort . map read . words <$> getLine
 
-    let ans = grow a m where
+    let ans = grow (a::Int) m where
           grow _ [] = 0
           grow x all@(y:ys)
             | x <= 1    = length all
