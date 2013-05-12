@@ -2,6 +2,7 @@ import Control.Applicative
 import Control.Monad
 import Data.Function
 import Data.List
+import qualified Data.Set as Set
 import Text.Printf
 
 main = do
@@ -18,4 +19,6 @@ main = do
 
     printf "Case #%d: %d\n" (caseNum::Int) (ans)
 
-isVowel c = c `elem` "aeiou"
+isVowel c = 
+  let vowels = Set.fromList "aeiou"
+  in c `Set.member` vowels
