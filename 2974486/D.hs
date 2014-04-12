@@ -1,7 +1,6 @@
 import Control.Applicative
 import Control.Lens
 import Control.Monad
-import Data.Ix
 import Data.List
 import Text.Printf
 
