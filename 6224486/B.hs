@@ -17,9 +17,10 @@ main = do
           where
             reduce n [] = n
             reduce n xss@(x:xs)
-              | x < 4 = reduce (succ n) (sortWith Down . filter (>0) . map pred $ xss)
+              | d <= headNum = x + n
               | otherwise = reduce (succ n) (sortWith Down $ (d+r):d:xs)
               where
                 (d, r) = divMod x 2
+                headNum = length . head . group $ xss
 
     printf "Case #%d: %d\n" (caseNum::Int) (ans::Int)
