@@ -26,9 +26,7 @@ main = do
             | Set.member l b && Set.member r b = False
             | Set.member l a || Set.member r b = solve (Set.insert l a) (Set.insert r b) xs
             | Set.member r a || Set.member l b = solve (Set.insert r a) (Set.insert l b) xs
-            | otherwise = if solve (Set.insert l a) (Set.insert r b) xs
-                          then True
-                          else solve (Set.insert r a) (Set.insert l b) xs
+            | otherwise = solve (Set.insert l a) (Set.insert r b) xs || solve (Set.insert r a) (Set.insert l b) xs
               where
                 [l, r] = x
 
