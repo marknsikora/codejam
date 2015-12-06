@@ -13,9 +13,8 @@ main = do
     n <- readLn
     pairs <- replicateM n $ words <$> getLine
 
-    let sortedPairs = sortBy (comparing head) . map sort $ pairs
-
     let ans = solve groupA groupB (tail sortedPairs) where
+          sortedPairs = sortBy (comparing head) . map sort $ pairs
           [left, right] = head sortedPairs
           groupA = Set.singleton left
           groupB = Set.singleton right
