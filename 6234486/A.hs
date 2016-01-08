@@ -4,15 +4,32 @@ import Data.List
 import Data.Ord
 import Text.Printf
 
+import Text.ParserCombinators.Parsec hiding ((<|>))
+
 import qualified Data.Set as Set
 
+eol = char '\n'
+integer = read <$> many1 digit
+
+with_count p = do
+  n <- integer <* eol
+  count n p
+
+names =
+  let name = many1 (letter <|> char '_')
+  in (\a b -> [a, b]) <$> name <* spaces <*> name
+
+testcase = with_count $ names <* eol
+
+parser = with_count testcase <* eof
+
 main = do
-  tests <- readLn
+  contents <- getContents
+  let testcases = case (parse parser "(stdin)" contents) of
+        Left err -> error $ show err
+        Right x  -> x
 
-  forM_ [1..tests] $ \ caseNum -> do
-    n <- readLn
-    pairs <- replicateM n $ words <$> getLine
-
+  forM_ (zip testcases [1..]) $ \ (pairs, caseNum) -> do
     let ans = solve groupA groupB (tail sortedPairs) where
           sortedPairs = sortBy (comparing head) . map sort $ pairs
           [left, right] = head sortedPairs
